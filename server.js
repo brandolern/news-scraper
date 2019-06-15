@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const exphbs = require("express-handlebars");
@@ -8,7 +9,7 @@ const PORT = 3000;
 
 const app = express();
 
-require("./routes/apiRoutes")(app);
+require("./routes/apiRoutes.js")(app);
 require("./routes/htmlRoutes")(app);
 
 app.use(logger("dev"));
@@ -20,8 +21,7 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
+app.use(bodyParser.json());
 // const MONGODB_URI =
 // 	process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
