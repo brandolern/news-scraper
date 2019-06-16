@@ -6,15 +6,7 @@ const articleSchema = new Schema({
 		type: String,
 		required: true
 	},
-	price: {
-		type: String,
-		required: true
-	},
-	image_link: {
-		type: String,
-		required: true
-	},
-	rating: {
+	link: {
 		type: String,
 		required: true
 	},
