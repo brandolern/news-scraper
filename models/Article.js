@@ -10,6 +10,14 @@ const articleSchema = new Schema({
 		type: String,
 		required: true
 	},
+	description: {
+		type: String,
+		required: true
+	},
+	imageLink: {
+		type: String,
+		required: true
+	},
 	notes: [
 		{
 			type: Schema.Types.ObjectId,

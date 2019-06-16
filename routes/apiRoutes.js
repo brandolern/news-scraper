@@ -8,25 +8,35 @@ module.exports = function(app) {
 			.get("https://www.huffpost.com/section/us-news")
 			.then(function(response) {
 				const $ = cheerio.load(response.data);
+
 				let result = {};
 
 				$(".card__link").each(function(index, element) {
-					if (index < 16) index++;
-					else {
-						let title = $(this)
-							.children("div")
-							.text();
+					let title = $(this)
+						.children("div")
+						.text();
 
-						result.title = title.substring(1, title.length - 1);
-						result.link = $(this).attr("href");
-
-						db.Article.create(result)
-							.then(dbarticle => {})
-							.catch(err => {
-								console.log(err);
-							});
-					}
+					result.title = title.substring(1, title.length - 1);
+					result.link = $(this).attr("href");
 				});
+
+				$(".card__image").each(function(index, element) {
+					result.description = $(this)
+						.children("img")
+						.attr("alt");
+
+					result.imageLink = $(this)
+						.children("img")
+						.attr("src");
+				});
+
+				// db.Article.create(result)
+				// 	.then(dbArticle => {
+				// 		console.log(dbArticle);
+				// 	})
+				// 	.catch(err => {
+				// 		console.log(err);
+				// 	});
 				res.send("Scrape Complete");
 			});
 	});
