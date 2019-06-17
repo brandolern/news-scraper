@@ -9,42 +9,73 @@ module.exports = function(app) {
 			.then(function(response) {
 				const $ = cheerio.load(response.data);
 
-				let result = {};
-
 				$(".card__link").each(function(index, element) {
-					let title = $(this)
-						.children("div")
-						.text();
+					let result = {};
+					if (index < 5) return;
+					else {
+						let title = $(this)
+							.children("div")
+							.text();
 
-					result.title = title.substring(1, title.length - 1);
-					result.link = $(this).attr("href");
+						result.title = title.substring(1, title.length - 1);
+						result.link = $(this).attr("href");
+
+						db.Article.create(result)
+							.then(dbArticle => {
+								console.log(dbArticle);
+							})
+							.catch(err => {
+								res.json(err);
+							});
+					}
 				});
 
-				$(".card__image").each(function(index, element) {
-					result.description = $(this)
-						.children("img")
-						.attr("alt");
+				// function secondScrape() {
+				// 	let counter = 0;
 
-					result.imageLink = $(this)
-						.children("img")
-						.attr("src");
-				});
+				// 	$(".card__image").each(function(index, element) {
+				// 		if (index < 5) return;
+				// 		else {
+				// 			secondScrapeResults.push(
+				// 				$(this)
+				// 					.children("img")
+				// 					.attr("alt")
+				// 			);
 
-				// db.Article.create(result)
-				// 	.then(dbArticle => {
-				// 		console.log(dbArticle);
+				// 			secondScrapeResults.push(
+				// 				$(this)
+				// 					.children("img")
+				// 					.attr("src")
+				// 			);
+				// 		}
+				// 	});
+				// }
+
+				// db.Article.updateOne(
+				// 	dbArticle._id,
+				// 	{
+				// 		description: secondScrapeResults[i],
+				// 		imageLink: secondScrapeResults[i + 1]
+				// 	},
+				// 	{
+				// 		upsert: true
+				// 	}
+				// )
+				// 	.then(dbUpdate => {
+				// 		console.log(dbUpdate);
 				// 	})
 				// 	.catch(err => {
-				// 		console.log(err);
+				// 		res.json(err);
 				// 	});
-				res.send("Scrape Complete");
 			});
 	});
 
 	app.get("/articles", function(req, res) {
 		db.Article.find({})
 			.then(dbArticles => {
-				res.json(dbArticles);
+				res.render({
+					articles: dbArticles
+				});
 			})
 			.catch(err => {
 				res.json(err);

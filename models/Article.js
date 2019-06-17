@@ -3,20 +3,20 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const articleSchema = new Schema({
 	title: {
-		type: String,
-		required: true
+		type: String
+		// required: true
 	},
 	link: {
-		type: String,
-		required: true
+		type: String
+		// required: true
 	},
 	description: {
-		type: String,
-		required: true
+		type: String
+		// required: true
 	},
 	imageLink: {
-		type: String,
-		required: true
+		type: String
+		// required: true
 	},
 	notes: [
 		{
