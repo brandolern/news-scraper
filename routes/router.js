@@ -3,13 +3,8 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 module.exports = function(app) {
-	const scraped = false;
 	app.get("/", function(req, res) {
-		if (scraped === false) {
-			res.render("index");
-		} else {
-			location.replace("/articles");
-		}
+		res.render("index");
 	});
 	app.get("/scrape", function(req, res) {
 		axios
@@ -36,47 +31,8 @@ module.exports = function(app) {
 								res.json(err);
 							});
 					}
-					res.send("Scrape Successful!");
-					scraped = true;
 				});
-
-				// function secondScrape() {
-				// 	let counter = 0;
-
-				// 	$(".card__image").each(function(index, element) {
-				// 		if (index < 5) return;
-				// 		else {
-				// 			secondScrapeResults.push(
-				// 				$(this)
-				// 					.children("img")
-				// 					.attr("alt")
-				// 			);
-
-				// 			secondScrapeResults.push(
-				// 				$(this)
-				// 					.children("img")
-				// 					.attr("src")
-				// 			);
-				// 		}
-				// 	});
-				// }
-
-				// db.Article.updateOne(
-				// 	dbArticle._id,
-				// 	{
-				// 		description: secondScrapeResults[i],
-				// 		imageLink: secondScrapeResults[i + 1]
-				// 	},
-				// 	{
-				// 		upsert: true
-				// 	}
-				// )
-				// 	.then(dbUpdate => {
-				// 		console.log(dbUpdate);
-				// 	})
-				// 	.catch(err => {
-				// 		res.json(err);
-				// 	});
+				res.send("Added 10 articles!");
 			});
 	});
 
@@ -126,3 +82,41 @@ module.exports = function(app) {
 			});
 	});
 };
+
+// function secondScrape() {
+// 	let counter = 0;
+
+// 	$(".card__image").each(function(index, element) {
+// 		if (index < 5) return;
+// 		else {
+// 			secondScrapeResults.push(
+// 				$(this)
+// 					.children("img")
+// 					.attr("alt")
+// 			);
+
+// 			secondScrapeResults.push(
+// 				$(this)
+// 					.children("img")
+// 					.attr("src")
+// 			);
+// 		}
+// 	});
+// }
+
+// db.Article.updateOne(
+// 	dbArticle._id,
+// 	{
+// 		description: secondScrapeResults[i],
+// 		imageLink: secondScrapeResults[i + 1]
+// 	},
+// 	{
+// 		upsert: true
+// 	}
+// )
+// 	.then(dbUpdate => {
+// 		console.log(dbUpdate);
+// 	})
+// 	.catch(err => {
+// 		res.json(err);
+// 	});

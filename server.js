@@ -9,7 +9,7 @@ const PORT = 3000;
 
 const app = express();
 
-require("./routes/apiRoutes.js")(app);
+require("./routes/router.js")(app);
 
 app.use(logger("dev"));
 
