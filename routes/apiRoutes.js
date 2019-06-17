@@ -3,6 +3,14 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 module.exports = function(app) {
+	const scraped = false;
+	app.get("/", function(req, res) {
+		if (scraped === false) {
+			res.render("index");
+		} else {
+			location.replace("/articles");
+		}
+	});
 	app.get("/scrape", function(req, res) {
 		axios
 			.get("https://www.huffpost.com/section/us-news")
@@ -28,6 +36,8 @@ module.exports = function(app) {
 								res.json(err);
 							});
 					}
+					res.send("Scrape Successful!");
+					scraped = true;
 				});
 
 				// function secondScrape() {

@@ -10,7 +10,6 @@ const PORT = 3000;
 const app = express();
 
 require("./routes/apiRoutes.js")(app);
-require("./routes/htmlRoutes")(app);
 
 app.use(logger("dev"));
 

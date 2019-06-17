@@ -1,3 +1,9 @@
+.jumbotron {
+	margin-bottom: 0px;
+}
+.articles {
+	margin-bottom: 20px;
+}
 #scrape {
 	padding: 10px 20px;
 }
