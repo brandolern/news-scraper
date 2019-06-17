@@ -6,6 +6,9 @@ module.exports = function(app) {
 	app.get("/", function(req, res) {
 		res.render("index");
 	});
+	app.get("/saved", function(req, res) {
+		res.render("saved");
+	});
 	app.get("/scrape", function(req, res) {
 		axios
 			.get("https://www.huffpost.com/section/us-news")
@@ -74,8 +77,8 @@ module.exports = function(app) {
 					{ new: true }
 				);
 			})
-			.then(function(dbUser) {
-				res.json(dbUser);
+			.then(function(dbNote) {
+				res.json(dbNote);
 			})
 			.catch(function(err) {
 				res.json(err);
@@ -104,14 +107,14 @@ module.exports = function(app) {
 // 	});
 // }
 
-// db.Article.updateOne(
-// 	dbArticle._id,
+// db.Article.findOneAndUpdate(
+// 	{_id: dbArticle._id},
 // 	{
 // 		description: secondScrapeResults[i],
 // 		imageLink: secondScrapeResults[i + 1]
 // 	},
 // 	{
-// 		upsert: true
+// 		new: true
 // 	}
 // )
 // 	.then(dbUpdate => {

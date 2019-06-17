@@ -1,8 +1,33 @@
 .jumbotron {
-	margin-bottom: 0px;
+	margin: 0px;
+	padding: 0px;
+	height: 450px;
+	background-image: url("../images/newspaper.png");
+	border-radius: 0;
+}
+.header-text {
+	padding-top: 175px;
+	font-size: 2.5rem;
+	font-weight: 600;
+	color: white;
+}
+.lead {
+	font-weight: 400;
 }
 .articles {
 	margin-bottom: 20px;
+}
+.divider {
+	height: 50px;
+	width: 100%;
+}
+.card-title:hover {
+	color: #d6d6d6;
+}
+#headerImg {
+	overflow: hidden;
+	/* height: 450px; */
+	z-index: -1;
 }
 #scrape {
 	padding: 10px 20px;

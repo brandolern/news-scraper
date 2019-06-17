@@ -10,18 +10,23 @@
         <a class="nav-link" href="/articles">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Saved Articles</a>
+        <a class="nav-link" href="/saved">Saved Articles</a>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-md btn-danger" id="scrape">Scrape New Articles</button>
       </li>
     </ul>
   </div>
 </nav>
 <section class="header">
-  <div class="jumbotron text-center">
-    <h2>See what's new from The Huffington Post! </h2>
-    <p class="lead">Click the red button below</p>
-    <button class="btn btn-md btn-danger" id="scrape">Scrape New Articles</button>
+  <div class="jumbotron">
+    <div class="text-center text-white">
+      <h2 class="header-text">See what's new from The Huffington Post! </h2>
+      <p class="lead">Click the red button above to start scraping</p>
+    </div>
   </div>
 </section>
+<div class="divider bg-secondary"></div>
 <section class="articles">
   {{#each articles}}
     <div class="card" style="width: 100%">
@@ -38,7 +43,7 @@
 </section>
 
 <footer class="footer bg-dark text-white">
-  <div class="text-center py-2">
+  <div class="text-center py-2 align-baseline">
     <p>© 2019 Brandon Lerner</p>
   </div>
 </footer>
