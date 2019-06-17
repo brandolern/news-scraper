@@ -13,12 +13,14 @@ require("./routes/apiRoutes.js")(app);
 require("./routes/htmlRoutes")(app);
 
 app.use(logger("dev"));
+
 app.engine(
 	"handlebars",
 	exphbs({
 		defaultLayout: "main"
 	})
 );
+app.use(express.static("public"));
 app.set("view engine", "handlebars");
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());

@@ -1,1 +1,46 @@
-<h1>News Scraper</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <a class="navbar-brand text-white" href="/">News Scraper</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active text-white">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Saved Articles</a>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-md btn-danger" id="scrape-new">Scrape New Articles</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+<section class="header">
+  <div class="jumbotron text-center">
+    <h2>See what's new from The Huffington Post! </h2>
+    <button class="btn btn-lg btn-danger" id="scrape">Scrape Some News</button>
+  </div>
+</section>
+<section class="articles">
+  {{!-- {{#each articles}} --}}
+  <div class="card" style="width: 100%">
+    <div class="card-header bg-primary">
+      <a class="text-white" style="text-decoration: none;" href="#">
+        <h2 class="card-title d-inline">News Headline</h2>
+      </a>
+      <button class="btn btn-md btn-warning float-right" id="save">Save
+        Article</button>
+    </div>
+    <div class="card-body"></div>
+  </div>
+  {{!-- {{/each}} --}}
+</section>
+
+<footer class="footer bg-dark text-white">
+  <div class="text-center py-2">
+    <p>© 2019 Brandon Lerner</p>
+  </div>
+</footer>
