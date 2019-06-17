@@ -25,18 +25,18 @@
   </div>
 </section>
 <section class="articles">
-  {{!-- {{#each articles}} --}}
-  <div class="card" style="width: 100%">
-    <div class="card-header bg-primary">
-      <a class="text-white" style="text-decoration: none;" href="#">
-        <h2 class="card-title d-inline">News Headline</h2>
-      </a>
-      <button class="btn btn-md btn-warning float-right" id="save">Save
-        Article</button>
+  {{#each articles}}
+    <div class="card" style="width: 100%">
+      <div class="card-header bg-primary">
+        <a class="text-white" style="text-decoration: none;" href="{{this.link}}">
+          <h3 class="card-title d-inline">{{this.title}}</h3>
+        </a>
+        <button class="btn btn-md btn-warning float-right" id="save" data-id="{{this._id}}">Save
+          Article</button>
+      </div>
+      <div class="card-body"></div>
     </div>
-    <div class="card-body"></div>
-  </div>
-  {{!-- {{/each}} --}}
+  {{/each}}
 </section>
 
 <footer class="footer bg-dark text-white">

@@ -72,9 +72,15 @@ module.exports = function(app) {
 
 	app.get("/articles", function(req, res) {
 		db.Article.find({})
-			.then(dbArticles => {
-				res.render({
-					articles: dbArticles
+			.then(function(dbArticles) {
+				let tenArticles = dbArticles.filter(article => {
+					if (dbArticles.indexOf(article) < 10) {
+						return article;
+					}
+				});
+				console.log(tenArticles);
+				res.render("index", {
+					articles: tenArticles
 				});
 			})
 			.catch(err => {
