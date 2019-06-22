@@ -23,10 +23,9 @@ app.use(express.static("public"));
 app.set("view engine", "handlebars");
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// const MONGODB_URI =
-// 	process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/3000";
 
-// mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 mongoose.connect("mongodb://localhost/scaper_db", {
 	useNewUrlParser: true
 });

@@ -14,7 +14,7 @@ module.exports = function(app) {
 			.get("https://www.huffpost.com/section/us-news")
 			.then(function(response) {
 				const $ = cheerio.load(response.data);
-
+				ids = [];
 				$(".card__link").each(function(index, element) {
 					let result = {};
 					if (index < 5) return;
@@ -28,7 +28,7 @@ module.exports = function(app) {
 
 						db.Article.create(result)
 							.then(dbArticle => {
-								console.log(dbArticle);
+								ids.push(dbArticle._id);
 							})
 							.catch(err => {
 								res.json(err);
@@ -38,6 +38,29 @@ module.exports = function(app) {
 				res.send("Added 10 articles!");
 			});
 	});
+
+	// if (ids.length === 19) {
+	// 	function secondScrape() {
+	// 		let counter = 0;
+
+	// 		$(".card__image").each(function(index, element) {
+	// 			if (index < 5) return;
+	// 			else {
+	// 				secondScrapeResults.push(
+	// 					$(this)
+	// 						.children("img")
+	// 						.attr("alt")
+	// 				);
+
+	// 				secondScrapeResults.push(
+	// 					$(this)
+	// 						.children("img")
+	// 						.attr("src")
+	// 				);
+	// 			}
+	// 		});
+	// 	}
+	// }
 
 	app.get("/articles", function(req, res) {
 		db.Article.find({})
@@ -85,27 +108,6 @@ module.exports = function(app) {
 			});
 	});
 };
-
-// function secondScrape() {
-// 	let counter = 0;
-
-// 	$(".card__image").each(function(index, element) {
-// 		if (index < 5) return;
-// 		else {
-// 			secondScrapeResults.push(
-// 				$(this)
-// 					.children("img")
-// 					.attr("alt")
-// 			);
-
-// 			secondScrapeResults.push(
-// 				$(this)
-// 					.children("img")
-// 					.attr("src")
-// 			);
-// 		}
-// 	});
-// }
 
 // db.Article.findOneAndUpdate(
 // 	{_id: dbArticle._id},
