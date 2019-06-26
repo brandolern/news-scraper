@@ -1,15 +1,7 @@
 const db = require("../models");
-const axios = require("axios");
-const cheerio = require("cheerio");
 
-module.exports = function(app) {
-	app.get("/", function(req, res) {
-		res.render("index");
-	});
-	app.get("/saved", function(req, res) {
-		res.render("saved");
-	});
-	app.get("/scrape", function(req, res) {
+module.exports = {
+	scrape() {
 		axios.get("https://www.huffpost.com/section/us-news").then(response => {
 			const $ = cheerio.load(response.data);
 			let articleIds = [];
@@ -74,51 +66,5 @@ module.exports = function(app) {
 				});
 			};
 		});
-	});
-
-	app.get("/articles", function(req, res) {
-		db.Article.find({})
-			.then(function(dbArticles) {
-				let tenArticles = dbArticles.filter(article => {
-					if (dbArticles.indexOf(article) < 10) {
-						return article;
-					}
-				});
-				console.log(tenArticles);
-				res.render("index", {
-					articles: tenArticles
-				});
-			})
-			.catch(err => {
-				res.json(err);
-			});
-	});
-
-	app.get("/articles/:id", function(req, res) {
-		db.Article.find({ _id: req.params.id })
-			.populate("notes")
-			.then(dbArticle => {
-				res.json(dbArticle);
-			})
-			.catch(err => {
-				res.json(err);
-			});
-	});
-
-	app.post("/articles/:id", function(req, res) {
-		db.Note.create(req.body)
-			.then(function(dbNote) {
-				return db.Article.findOneAndUpdate(
-					{ _id: req.params.id },
-					{ notes: dbNote._id },
-					{ new: true }
-				);
-			})
-			.then(function(dbNote) {
-				res.json(dbNote);
-			})
-			.catch(function(err) {
-				res.json(err);
-			});
-	});
+	}
 };
