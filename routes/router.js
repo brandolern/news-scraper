@@ -8,41 +8,12 @@ module.exports = function(app) {
 	app.get("/", function(req, res) {
 		res.render("index");
 	});
-	app.get("/saved", function(req, res) {
-		res.render("saved");
-	});
+	app.get("/saved", controller.fetchSavedArticles);
 
 	/////// API ROUTES/////////
-	app.get("/api/scrape", controller.scrape, function(req, res) {
-		res.send("Scrape Complete");
-	});
+	app.get("/api/scrape", controller.scrape);
 	app.get("/api/articles", controller.fetchArticles);
-
-	app.get("/api/articles/:id", function(req, res) {
-		db.Article.find({ _id: req.params.id })
-			.populate("notes")
-			.then(dbArticle => {
-				res.json(dbArticle);
-			})
-			.catch(err => {
-				res.json(err);
-			});
-	});
-
-	app.post("/api/articles/:id", function(req, res) {
-		db.Note.create(req.body)
-			.then(function(dbNote) {
-				return db.Article.updateOne(
-					{ _id: req.params.id },
-					{ notes: dbNote._id },
-					{ new: true }
-				);
-			})
-			.then(function(dbNote) {
-				res.json(dbNote);
-			})
-			.catch(function(err) {
-				res.json(err);
-			});
-	});
+	app.put("/api/articles/:id/save", controller.saveArticle);
+	app.put("/api/articles/:id/delete", controller.deleteArticle);
+	app.post("/api/articles/:id", controller.saveNote);
 };

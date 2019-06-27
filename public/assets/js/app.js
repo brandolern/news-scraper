@@ -6,7 +6,42 @@ $(document).ready(function() {
 		});
 	});
 
-	$(document).on("click", "#save", () => {
+	$(document).on("click", "#save", function() {
 		let id = $(this).attr("data-id");
+		const url = `/api/articles/${id}/save`;
+		$.ajax({
+			type: "put",
+			url: url
+		})
+			.then(function(data) {
+				alert("Article saved");
+			})
+			.catch(err => {
+				if (err) throw err;
+			});
+	});
+
+	$(document).on("click", "#delete", function() {
+		let id = $(this).attr("data-id");
+		const url = `/api/articles/${id}/delete`;
+		$.ajax({
+			type: "put",
+			url: url
+		})
+			.then(function(data) {
+				alert(data);
+				location.reload();
+			})
+			.catch(err => {
+				if (err) throw err;
+			});
+	});
+
+	$(document).on("click", "#add-note", function() {
+		let id = $(this).attr("data-id");
+		const url = `/api/articles/${id}/delete`;
+		$.post("/api/articles/:id/", function(data) {
+			alert("Note Saved");
+		});
 	});
 });
