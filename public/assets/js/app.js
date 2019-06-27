@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	$("#scrape").on("click", () => {
-		$.get("/scrape", function(data) {
+		$.get("/api/scrape", function(data) {
 			alert(data);
-			location.replace("/articles");
+			location.replace("/api/articles");
 		});
 	});
 
