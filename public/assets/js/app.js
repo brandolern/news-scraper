@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$("#scrape").on("click", () => {
-		$.get("/api/scrape", function(data) {
+		$.get("/scrape", function(data) {
 			alert(data);
 			location.replace("/api/articles");
 		});
