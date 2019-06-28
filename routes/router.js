@@ -6,7 +6,7 @@ const scraperController = require("../controller/scraperController");
 
 module.exports = function(app) {
 	/////// SCRAPE ROUTE/////////
-	app.get("/scrape", controller.scrape);
+	app.get("/scrape", scraperController.scrape);
 
 	/////// PAGE ROUTES/////////
 	app.get("/", function(req, res) {
@@ -16,7 +16,8 @@ module.exports = function(app) {
 
 	/////// API ROUTES/////////
 	app.get("/api/articles", controller.fetchArticles);
+	app.get("/api/articles/:id", controller.getArticleNotes);
 	app.put("/api/articles/:id/save", controller.saveArticle);
 	app.put("/api/articles/:id/delete", controller.deleteArticle);
-	app.post("/api/articles/:id", controller.saveNote);
+	// app.post("/api/articles/:id", controller.saveNote);
 };

@@ -55,6 +55,10 @@ exports.deleteArticle = function(req, res, next) {
 			res.json(err);
 		});
 
+	exports.getArticleNotes = function(req, res, next) {
+		db.Article.findOne({ _id: req.params.id }).populate();
+	};
+
 	exports.saveNote = function(req, res, next) {
 		db.Note.create(req.body)
 			.then(function(dbNote) {

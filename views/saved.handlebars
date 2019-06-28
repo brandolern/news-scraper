@@ -34,12 +34,37 @@
                 </a>
             </div>
             <div class="card-footer">
-                <button class="btn btn-lg btn-info saved-button" id="add-note" data-id="{{this._id}}">Add Note</button>
+                <button class="btn btn-lg btn-info saved-button" id="note-modal" data-id="{{this._id}}"
+                    data-toggle="modal" data-target="#note-modal">Add Note</button>
                 <button class="btn btn-lg btn-danger saved-button" id="delete" data-id="{{this._id}}">Delete</button>
             </div>
         </div>
     {{/each}}
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="note-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Notes For Article</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="note-container list-group">
+
+                </ul>
+                <textarea placeholder="New Note" rows="4" cols="60"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-lg" id="add-note">Save Note</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <footer class="footer bg-dark text-white">
     <p class="text-center">© 2019 Brandon Lerner</p>
