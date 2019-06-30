@@ -13,8 +13,8 @@ module.exports = function(app) {
 
 	/////// API ROUTES/////////
 	app.get("/api/articles", controller.fetchArticles);
-	// app.get("/api/articles/:id", controller.getArticleNotes);
 	app.put("/api/articles/:id/save", controller.saveArticle);
 	app.put("/api/articles/:id/delete", controller.deleteArticle);
+	app.get("/api/articles/:id", controller.getArticleNotes);
 	app.post("/api/articles/:id/note", controller.saveNote);
 };

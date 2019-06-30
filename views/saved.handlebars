@@ -24,6 +24,7 @@
 </section>
 <section class="articles">
     {{#each saved}}
+
         <div class="card news-card">
             <a href="{{this.link}}">
                 <img class="card-img-top" src="{{this.imageLink}}" alt="image">
@@ -34,39 +35,39 @@
                 </a>
             </div>
             <div class="card-footer">
-                <button class="btn btn-lg btn-info saved-button" id="view-notes" data-id="{{this._id}}"
-                    data-toggle="modal" data-target="#note-modal">View Notes</button>
-                <button class="btn btn-lg btn-danger saved-button" id="delete" data-id="{{this._id}}">Delete</button>
-            </div>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="note-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Notes For Article</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <ul class="note-container list-group">
 
-                        </ul>
-                        <input type="text" id="note-title" placeholder="Note title" />
-                        <textarea placeholder="Note Body" rows="4" cols="60" id="note-body"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-lg" id="save-note" data-id="{{this._id}}">Save
-                            Note</button>
-                    </div>
-                </div>
+                <button class="btn btn-lg btn-info view-notes" data-id="{{this._id}}">View
+                    Notes</button>
+                <button class="btn btn-lg btn-danger delete" data-id="{{this._id}}">Delete</button>
             </div>
         </div>
     {{/each}}
 </section>
-
+<!-- Modal -->
+<div class="modal fade" id="note-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Article Notes</h5>
+                <button type="button" id="close-note-modal" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group" id="note-container">
+                </ul>
+                <h6>Add Note</h6>
+                <input type="text" id="note-title" placeholder="Note title">
+                <textarea id="note-body" placeholder="Note Body" rows="4" cols="60"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-lg" id="save-note" data-dismiss="modal">Save
+                    Note</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <footer class="footer bg-dark text-white">
     <p class="text-center">© 2019 Brandon Lerner</p>

@@ -19,7 +19,6 @@ exports.fetchArticles = function(req, res, next) {
 //Get articles with saved: true from the database then render the saved page
 exports.fetchSavedArticles = function(req, res, next) {
 	db.Article.find({ saved: true })
-		// .populate("notes")
 		.then(savedArticles => {
 			res.render("saved", {
 				saved: savedArticles
@@ -45,9 +44,8 @@ exports.saveArticle = function(req, res, next) {
 exports.deleteArticle = function(req, res, next) {
 	db.Article.findByIdAndUpdate(
 		{ _id: req.params.id },
-		{ saved: false },
-		{ useFindAndModify: false },
-		{ notes: [] }
+		{ saved: false, notes: [] },
+		{ useFindAndModify: false }
 	)
 		.then(deletedArticle => {
 			res.json(deletedArticle);
@@ -57,9 +55,16 @@ exports.deleteArticle = function(req, res, next) {
 		});
 };
 
-// exports.getArticleNotes = function(req, res, next) {
-// 	db.Article.findOne({ _id: req.params.id }).populate();
-// };
+exports.getArticleNotes = function(req, res, next) {
+	db.Article.findOne({ _id: req.params.id })
+		.populate("notes")
+		.then(dbNotes => {
+			res.json({ notes: dbNotes.notes, id: dbNotes.id });
+		})
+		.catch(err => {
+			res.json(err);
+		});
+};
 
 exports.saveNote = function(req, res, next) {
 	db.Note.create({
@@ -69,7 +74,7 @@ exports.saveNote = function(req, res, next) {
 		.then(function(dbNote) {
 			db.Article.updateOne(
 				{ _id: req.params.id },
-				{ notes: dbNote._id },
+				{ $push: { notes: dbNote._id } },
 				{ new: true }
 			).then(dbNote => {
 				res.json(dbNote);

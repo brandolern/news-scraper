@@ -44,6 +44,16 @@
 	width: 50%;
 	float: left;
 }
+#note-container {
+	margin-bottom: 10px;
+}
+#note-item {
+	list-style-type: none;
+	border: 1px solid #f8f9fa;
+}
+#note-title {
+	margin-bottom: 5px;
+}
 .footer {
 	clear: both;
 	width: 100%;
