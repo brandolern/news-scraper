@@ -1,6 +1,3 @@
-const db = require("../models");
-// const axios = require("axios");
-// const cheerio = require("cheerio");
 const controller = require("../controller/controller");
 const scraperController = require("../controller/scraperController");
 
@@ -16,8 +13,8 @@ module.exports = function(app) {
 
 	/////// API ROUTES/////////
 	app.get("/api/articles", controller.fetchArticles);
-	app.get("/api/articles/:id", controller.getArticleNotes);
+	// app.get("/api/articles/:id", controller.getArticleNotes);
 	app.put("/api/articles/:id/save", controller.saveArticle);
 	app.put("/api/articles/:id/delete", controller.deleteArticle);
-	// app.post("/api/articles/:id", controller.saveNote);
+	app.post("/api/articles/:id/note", controller.saveNote);
 };

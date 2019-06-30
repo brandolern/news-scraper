@@ -8,8 +8,9 @@ const db = require("./models");
 const PORT = 3000;
 
 const app = express();
-
-require("./routes/router.js")(app);
+// BodyParser Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(logger("dev"));
 
@@ -21,8 +22,10 @@ app.engine(
 );
 app.use(express.static("public"));
 app.set("view engine", "handlebars");
-app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
+require("./routes/router.js")(app);
+
+// app.use(express.urlencoded({ extended: true }));
 // const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/3000";
 
 // mongoose.connect(MONGODB_URI, { useNewUrlParser: true });

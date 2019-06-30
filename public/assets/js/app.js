@@ -29,7 +29,6 @@ $(document).ready(function() {
 			url: url
 		})
 			.then(function(data) {
-				alert(data);
 				location.reload();
 			})
 			.catch(err => {
@@ -37,11 +36,34 @@ $(document).ready(function() {
 			});
 	});
 
-	$(document).on("click", "#add-note", function() {
+	$(document).on("click", "#view-notes", function() {
 		let id = $(this).attr("data-id");
-		const url = `/api/articles/${id}/delete`;
-		$.post("/api/articles/:id/", function(data) {
-			alert("Note Saved");
-		});
+		$("#note-modal").modal();
+	});
+
+	$(document).on("click", "#save-note", function() {
+		let id = $(this).attr("data-id");
+		let url = `/api/articles/${id}/note`;
+		let note = {
+			title: $("#note-title")
+				.val()
+				.trim(),
+			body: $("#note-body")
+				.val()
+				.trim()
+		};
+		$.ajax({
+			type: "post",
+			url: url,
+			data: note
+		})
+			.then(function(data, status) {
+				if (status) console.log(data);
+				$("#note-title").val("");
+				$("#note-body").val("");
+			})
+			.catch(err => {
+				if (err) throw err;
+			});
 	});
 });
