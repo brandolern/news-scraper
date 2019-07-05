@@ -38,7 +38,8 @@ $(document).ready(function() {
 
 	$(document).on("click", ".view-notes", function() {
 		let id = $(this).attr("data-id");
-
+		$("#note-title").remove();
+		$("#note-body").remove();
 		$("#save-note").attr("data-id", id);
 		$.get(`/api/articles/${id}`, function(data) {
 			for (i = 0; i < data.notes.length; i++) {
@@ -62,8 +63,17 @@ $(document).ready(function() {
 				noteItem.append(noteTitle, noteBody);
 				$("#note-container").append(noteItem);
 			}
-			// $("#note-title").val("");
-			// $("#note-body").val("");
+			// <input type="text" id="note-title" placeholder="Note title">
+			// 	<textarea id="note-body" placeholder="Note Body" rows="4" cols="60"></textarea>
+			let inputTitle = $("<input>").attr("id", "note-title");
+			inputTitle.attr("placeholder", "Note title");
+			inputTitle.attr("type", "text");
+			let inputBody = $("<textarea>").attr("id", "note-body");
+			inputBody.attr("placeholder", "Note body");
+			inputBody.attr("rows", "4");
+			inputBody.attr("cols", "60");
+
+			$(".modal-body").append(inputTitle, inputBody);
 			$("#note-modal").modal();
 		});
 	});
