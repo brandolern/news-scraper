@@ -30,7 +30,7 @@ require("./routes/router.js")(app);
 mongoose.connect(
 	process.env.MONGODB_URI ||
 		"mongodb://user:password1@ds049925.mlab.com:49925/heroku_93mkzx9p",
-	{ useMongoClient: true, useNewUrlParser: true }
+	{ useNewUrlParser: true }
 );
 // mongoose.connect("mongodb://localhost/scaper_db", {
 // 	useNewUrlParser: true
