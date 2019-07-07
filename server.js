@@ -26,11 +26,12 @@ app.set("view engine", "handlebars");
 require("./routes/router.js")(app);
 
 // app.use(express.urlencoded({ extended: true }));
-const MONGODB_URI =
-	process.env.MONGODB_URI ||
-	"mongodb://username:password@ds049925.mlab.com:49925/heroku_93mkzx9p";
 
-mongoose.connect(MONGODB_URI, { useMongoClient: true, useNewUrlParser: true });
+mongoose.connect(
+	process.env.MONGODB_URI ||
+		"mongodb://user:password1@ds049925.mlab.com:49925/heroku_93mkzx9p",
+	{ useMongoClient: true, useNewUrlParser: true }
+);
 // mongoose.connect("mongodb://localhost/scaper_db", {
 // 	useNewUrlParser: true
 // });
