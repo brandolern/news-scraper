@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const exphbs = require("express-handlebars");
 
 const db = require("./models");
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 // BodyParser Middleware
@@ -28,8 +28,7 @@ require("./routes/router.js")(app);
 // app.use(express.urlencoded({ extended: true }));
 
 mongoose.connect(
-	process.env.MONGODB_URI ||
-		"mongodb://user:password1@ds049925.mlab.com:49925/heroku_93mkzx9p",
+	process.env.MONGODB_URI || "mongodb://localhost3000/scaper_db",
 	{ useNewUrlParser: true }
 );
 // mongoose.connect("mongodb://localhost/scaper_db", {
@@ -39,3 +38,5 @@ mongoose.connect(
 app.listen(PORT, function() {
 	console.log("App running on port " + PORT + "!");
 });
+
+// heroku config: set MONGOLAB_URI = mongodb://username:password@ds01316.mlab.com:1316/food
